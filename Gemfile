@@ -16,6 +16,7 @@ gem "rails", "~> 4.2.0"
 gem "sass-rails", "~> 5.0"
 gem "title"
 gem "uglifier"
+gem "devise"
 
 group :development do
   gem "quiet_assets"
