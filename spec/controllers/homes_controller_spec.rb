@@ -9,15 +9,4 @@ describe HomesController do
       expect(response).to render_template(:show)
     end
   end
-
-  context "the user is logged in" do
-    it "redirects to user's dashboard" do
-      user = create(:user)
-      sign_in_as(user)
-
-      get :show
-
-      expect(response).to redirect_to(dashboard_path)
-    end
-  end
 end
