@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Give Melt</title>
+</head>
+<body>
+
+<h1>Welcome to MELT Home Page</h1>
+<p>This is what something we do here</p>
+
+
+<% if user_signed_in? %>
+  <li><%= link_to current_user.email, edit_user_registration_path %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+  <h2> Test API Key </h2> <%= current_user.api_key%>
+<% else %>
+  <li><%= link_to "Sign Up", new_user_registration_path %></li>
+  <li><%= link_to "Login", new_user_session_path %></li>
+<% end %>
+
+</body>
+</html>
