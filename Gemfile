@@ -15,6 +15,7 @@ gem "sass-rails", "~> 5.0"
 gem "title"
 gem "uglifier"
 gem "devise"
+gem "active_model_serializers"
 
 group :development do
   gem "quiet_assets"
@@ -29,6 +30,7 @@ group :development, :test do
   gem "bundler-audit", require: false
   gem "dotenv-rails"
   gem "factory_girl_rails"
+  gem "faker"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.4.0"

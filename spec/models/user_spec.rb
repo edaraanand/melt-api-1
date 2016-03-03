@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe User do
-  it { should have_one(:account) }
+  it { should belong_to(:account) }
 
   it 'should have a randomized id' do
     user_1 = User.create

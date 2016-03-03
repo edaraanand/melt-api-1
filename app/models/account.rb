@@ -1,9 +1,9 @@
 class Account < ActiveRecord::Base
-  before_create :randomize_id
+  before_create :randomize_id, :generate_test_api_key
+  before_validation :generate_test_api_key
 
-  belongs_to :user
-
-  validates :user_id, presence: true
+  has_many :users
+  has_many :addresses, dependent: :destroy
 
   private
 
@@ -11,5 +11,9 @@ class Account < ActiveRecord::Base
     begin
       self.id = SecureRandom.random_number(100_000)
     end while self.class.where(id: self.id).exists?
+  end
+
+  def generate_test_api_key
+    self.test_api_key = "test_#{SecureRandom.base64.tr('+/=', 'nopqrstuvwkyzabcdefghijklm')}"
   end
 end

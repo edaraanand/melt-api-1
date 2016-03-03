@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   before_create :randomize_id, :create_account
 
-  has_one :account
+  belongs_to :account
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def create_account
-    self.account = Account.create
+    self.account = Account.new
+    self.account_id = self.account.id
+    self.account.save!
   end
 end
