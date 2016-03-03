@@ -1,1 +1,47 @@
-<h1>Dashboard</h1>
+<%= render "general_top_nav" -%>
+
+      <%= render "general_navigation" -%>
+
+      <div class="dashboard-right">
+        <div class="dashboard-right-top">
+          <div data-delay="0" class="w-dropdown">
+            <div class="w-dropdown-toggle environment-selector">
+              <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
+              <div class="w-icon-dropdown-toggle"></div>
+            </div>
+            <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
+            </nav>
+          </div>
+        </div>
+        <div class="dashboard-right-metrics centered-metrics">
+          <div class="w-row">
+            <div class="w-col w-col-4">
+              <div class="metric-one">
+                <h2 class="metric-h2">$0.00</h2>
+                <p class="metric-paragraph">Spent in February</p>
+              </div>
+            </div>
+            <div class="w-col w-col-4">
+              <div class="metric-two">
+                <h2 class="metric-h2">0</h2>
+                <p class="metric-paragraph">total transactions</p>
+              </div>
+            </div>
+            <div class="w-col w-col-4">
+              <div class="metric-three">
+                <h2 class="metric-h2">$0.00</h2>
+                <p class="metric-paragraph">total spent</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-right-content regular-padding">
+          <h4 class="content-h4">charges</h4><%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
+          <h4 class="content-h4">transactions</h4><%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "dashboard_footer" -%>
