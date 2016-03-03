@@ -1,9 +1,7 @@
-@charset "utf-8";
-
-// @import "refills/flashes";
-@import "normalize.css";
-@import "webflow.css";
-
+/*
+ *= require_tree .
+ *= require_self
+ */
 
 // CUSTOM CSS
 
@@ -622,19 +620,23 @@ label {
 }
 
 .metric-one {
-  display: inline-block;
-  width: 33.3%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
 }
 
 .metric-two {
-  display: inline-block;
-  width: 33.3%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .metric-three {
-  display: inline-block;
-  width: 33.3%;
-  float: right;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
 }
 
 .metric-h2 {
@@ -679,11 +681,6 @@ label {
 .content-h4.centered {
   text-align: center;
   text-transform: none;
-}
-
-.content-h4.card-page {
-  line-height: 20px;
-  text-transform: capitalize;
 }
 
 .filler-graph {
@@ -857,16 +854,12 @@ label {
 }
 
 .dashboard-text-field.two-left {
-  display: inline-block;
-  width: 48%;
-  margin-right: 2%;
+  display: block;
   float: none;
 }
 
 .dashboard-text-field.two-right {
-  display: inline-block;
-  width: 48%;
-  margin-left: 2%;
+  display: block;
   float: none;
 }
 
@@ -879,8 +872,6 @@ label {
 
 .dashboard-text-field.three-left-field {
   display: inline-block;
-  width: 30%;
-  margin-right: 3.3%;
 }
 
 .dashboard-text-field.three-left-field.single-form {
@@ -888,17 +879,16 @@ label {
   clear: left;
 }
 
+.dashboard-text-field.three-left-field.single-form.postal-code {
+  width: 40%;
+}
+
 .dashboard-text-field.three-mid-field {
   display: inline-block;
-  width: 30%;
-  margin-right: 1.65%;
-  margin-left: 1.65%;
 }
 
 .dashboard-text-field.three-right-field {
   display: inline-block;
-  width: 30%;
-  margin-left: 3.3%;
 }
 
 .dashboard-text-field.half-left {
@@ -921,16 +911,16 @@ label {
   float: right;
 }
 
+.dashboard-text-field.three-left-field-name {
+  width: 90%;
+}
+
 .two-left-field-name {
-  display: inline-block;
-  width: 48%;
-  margin-right: 2%;
+  display: block;
 }
 
 .two-right-field-label {
-  display: inline-block;
-  width: 48%;
-  margin-left: 2%;
+  display: block;
   float: none;
 }
 
@@ -940,23 +930,16 @@ label {
 }
 
 .three-left-field-name {
-  display: inline-block;
-  width: 30%;
-  margin-right: 3.3%;
-  float: left;
+  display: block;
+  float: none;
 }
 
 .three-mid-field-name {
-  display: inline-block;
-  width: 30%;
-  margin-right: 1.65%;
-  margin-left: 1.65%;
+  display: block;
 }
 
 .three-right-field-name {
-  display: inline-block;
-  width: 30%;
-  margin-left: 3.3%;
+  display: block;
   float: none;
 }
 
@@ -1052,14 +1035,8 @@ label {
   text-align: right;
 }
 
-.headers.no-border.details-card-right {
-  display: inline-block;
-  width: 68%;
-  float: right;
-}
-
 .log-text {
-  display: inline-block;
+  display: block;
   overflow: visible;
   max-width: 220px;
   margin-top: 8px;
@@ -1087,6 +1064,8 @@ label {
 }
 
 .log-text.no-case.small-log-text {
+  padding-left: 5px;
+  float: left;
   font-size: 12px;
   line-height: 22px;
 }
@@ -1152,10 +1131,6 @@ label {
   background-color: #ccc;
 }
 
-.small-bottom-margin {
-  margin-bottom: 5px;
-}
-
 .light-h5 {
   font-weight: 300;
   text-transform: capitalize;
@@ -1174,11 +1149,6 @@ label {
   line-height: 22px;
   font-weight: 400;
   text-transform: none;
-}
-
-.no-margin.details.id-text {
-  margin-top: 20px;
-  float: right;
 }
 
 .test-mode-flash {
@@ -1219,14 +1189,12 @@ label {
 }
 
 .select-div {
-  display: inline-block;
-  width: 48%;
+  display: block;
   height: 36px;
   margin-top: 0px;
-  margin-left: 2%;
   padding-top: 6px;
   padding-left: 5px;
-  float: right;
+  float: left;
 }
 
 .select-label {
@@ -1259,50 +1227,11 @@ label {
   background-color: hsla(36, 45%, 98%, .6);
 }
 
-.log-item-left {
-  display: inline-block;
-  overflow: visible;
-  width: 24%;
-  height: 100%;
-  margin-right: 3.3%;
-  padding: 5px 10px 10px 20px;
-  float: left;
-}
-
-.log-item-left.status-codes {
-  width: 14%;
-}
-
-.log-item-mid {
-  display: inline-block;
-  overflow: visible;
-  width: 28%;
-  height: 100%;
-  margin-right: 1.65%;
-  margin-left: 1.65%;
-  padding: 5px 10px 10px;
-}
-
-.log-item-mid.status-codes-mid {
-  width: 36%;
-}
-
-.log-item-right {
-  display: inline-block;
-  overflow: visible;
-  width: 32%;
-  height: 100%;
-  margin-left: 3.3%;
-  padding: 5px 10px 10px;
-  float: none;
-}
-
 .log-carrot-div {
-  display: inline-block;
-  width: 6%;
+  display: block;
   height: 100%;
-  padding-top: 14px;
-  padding-left: 14px;
+  padding-top: 9px;
+  padding-right: 15px;
   float: right;
 }
 
@@ -1372,6 +1301,28 @@ label {
 
 .large-detail {
   font-size: 16px;
+}
+
+.no-padding-column-right {
+  padding-right: 0px;
+  padding-left: 15px;
+}
+
+.no-padding-left-column {
+  display: block;
+  padding-right: 15px;
+  padding-left: 0px;
+}
+
+.no-padding-middle-column {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.log-column {
+  padding-top: 3px;
+  padding-right: 10px;
+  padding-left: 15px;
 }
 
 @media (max-width: 991px) {
