@@ -1,6 +1,5 @@
 class Account < ActiveRecord::Base
-  before_create :randomize_id, :generate_test_api_key
-  before_validation :generate_test_api_key
+  before_validation :randomize_id, :generate_test_api_key
 
   has_many :users
   has_many :addresses, dependent: :destroy
