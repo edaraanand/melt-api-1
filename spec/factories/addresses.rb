@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :address do
-    description     Faker::Lorem.words(4)
+    description     Faker::Lorem.sentence
     name            Faker::Name.name
     company         Faker::Company.name
     address_line_1  Faker::Address.street_address
