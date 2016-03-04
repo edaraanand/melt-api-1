@@ -2,7 +2,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
   before_action :authenticate
 
   def index
-    addresses = Address.all
+    addresses = Address.where(account_id: @account.id)
 
     render(
       json: ActiveModel::ArraySerializer.new(
@@ -14,7 +14,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
   end
 
   def show
-    address = Address.find(params[:id])
+    address = @account.addresses.find(params[:id])
 
     render(json: Api::V1::AddressSerializer.new(address).to_json)
   end
