@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160303201956) do
     t.string   "email"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "account_id"
+    t.string   "account_id"
   end
 
   add_index "addresses", ["account_id"], name: "index_addresses_on_account_id", using: :btree
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160303201956) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "account_id"
+    t.string   "account_id"
   end
 
   add_index "users", ["account_id"], name: "index_users_on_account_id", using: :btree
