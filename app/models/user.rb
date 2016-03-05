@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def randomize_id
     begin
-      self.id = "usr_#{SecureRandom.urlsafe_base64.tr('+/=_-', 'nopqrstuvwkyzabcdefghijklm')}"
+      self.id = SecureRandom.random_number(100_000_000)
     end while self.class.where(id: self.id).exists?
   end
 

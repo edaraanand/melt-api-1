@@ -1,7 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
-    create_table :addresses, id: false do |t|
-      t.string :id, primary_key: true
+    create_table :addresses do |t|
       t.string :description
       t.string :name
       t.string :company
