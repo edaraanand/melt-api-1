@@ -8,7 +8,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
       json: ActiveModel::ArraySerializer.new(
         addresses,
         each_serializer: Api::V1::AddressSerializer,
-        root: 'addresses'
+        root: 'data'
       )
     )
   end

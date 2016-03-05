@@ -16,7 +16,7 @@ describe Api::V1::AddressesController do
       get :index
 
       expect(response).to be_success
-      expect(json['addresses'].count).to eq(7)
+      expect(json['data'].count).to eq(7)
     end
   end
 
@@ -29,9 +29,9 @@ describe Api::V1::AddressesController do
       get :show, { id: 1 }
 
       expect(response).to be_success
-      expect(json['address']['id']).to          eq(1)
-      expect(json['address']['description']).to eq(address.description)
-      expect(json['address']['company']).to     eq(address.company)
+      expect(json['id']).to          eq(1)
+      expect(json['description']).to eq(address.description)
+      expect(json['company']).to     eq(address.company)
     end
   end
 
