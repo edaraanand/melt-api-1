@@ -32,6 +32,16 @@ class Api::V1::AddressesController < Api::V1::BaseController
     )
   end
 
+  def destroy
+    address = @account.addresses.find(params[:id]).destroy
+
+    if !address.destroy
+      return api_error(status: 500)
+    end
+
+    render(json: { 'message': 'Success! Address has been deleted.' })
+  end
+
   private
 
   def create_params
