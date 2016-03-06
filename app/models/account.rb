@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
 
   def randomize_id
     begin
-      self.id = SecureRandom.random_number(100_000)
+      self.id = SecureRandom.random_number(100_000_000)
     end while self.class.where(id: self.id).exists?
   end
 

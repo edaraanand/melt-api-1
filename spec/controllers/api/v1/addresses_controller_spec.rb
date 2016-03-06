@@ -22,14 +22,14 @@ describe Api::V1::AddressesController do
 
   context '#show' do
     it 'sends data regarding a specific address associated to an account' do
-      address = create(:address, account_id: @user_account.id, id: 1)
+      address = create(:address, account_id: @user_account.id)
 
       add_token_to_header(@user_account.test_api_key)
 
-      get :show, { id: 1 }
+      get :show, { id: address.id }
 
       expect(response).to be_success
-      expect(json['id']).to          eq(1)
+      expect(json['id']).to          eq(address.id)
       expect(json['description']).to eq(address.description)
       expect(json['company']).to     eq(address.company)
     end
