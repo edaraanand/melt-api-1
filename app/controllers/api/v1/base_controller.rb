@@ -1,6 +1,8 @@
 class Api::V1::BaseController < ApplicationController
   protect_from_forgery with: :null_session
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   before_action :destroy_session
 
   def destroy_session
@@ -19,7 +21,11 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def authenticate
-    authenticate_or_request_with_http_token do |token, options|
+    authenticate_token || render_unauthorized
+  end
+
+  def authenticate_token
+    authenticate_with_http_token do |token, options|
       @account = Account.where(test_api_key: token).first
     end
   end
@@ -37,4 +43,20 @@ class Api::V1::BaseController < ApplicationController
 
     return errors_hash
   end
+
+  def render_unauthorized
+    self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+    render(
+      json: { 'error': 'Invalid HTTP token. Access denied.' },
+      status: 401
+    )
+  end
+
+  def record_not_found
+    render(
+      json: { 'message': 'Record not found.' },
+      status: 404
+    )
+  end
+
 end

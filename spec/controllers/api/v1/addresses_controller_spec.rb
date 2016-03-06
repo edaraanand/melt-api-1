@@ -33,6 +33,15 @@ describe Api::V1::AddressesController do
       expect(json['description']).to eq(address.description)
       expect(json['company']).to     eq(address.company)
     end
+
+    it 'sends a 404 when an address record is not found' do
+      add_token_to_header(@user_account.test_api_key)
+
+      get :show, { id: 'asdcaw1233' }
+
+      expect(response).to have_http_status(404)
+      expect(json['message']).to eq 'Record not found.'
+    end
   end
 
   context '#create' do
@@ -58,6 +67,32 @@ describe Api::V1::AddressesController do
 
       expect(response).to have_http_status(422)
       expect(@user_account.addresses.count).to eq 0
+    end
+  end
+
+  context '#delete' do
+    it 'allows the correct account to delete an address' do
+      address = create(:address, account_id: @user_account.id)
+
+      add_token_to_header(@user_account.test_api_key)
+
+      delete :destroy, { id: address.id }
+
+      expect(response).to have_http_status(200)
+      expect(json['message']).to eq 'Success! Address has been deleted.'
+      expect(Address.all).to eq []
+    end
+
+    it 'does not allow the incorrect account to update the address' do
+      address = create(:address, account_id: @user_account.id)
+
+      add_token_to_header('incorrect_token')
+
+      delete :destroy, { id: address.id }
+
+      expect(response).to have_http_status(401)
+      expect(json['error']).to eq 'Invalid HTTP token. Access denied.'
+      expect(Address.count).to eq 1
     end
   end
 
