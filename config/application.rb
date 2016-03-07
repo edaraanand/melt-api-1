@@ -16,6 +16,8 @@ module MeltApi
       generate.test_framework :rspec
     end
 
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     config.action_controller.action_on_unpermitted_parameters = :raise
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job

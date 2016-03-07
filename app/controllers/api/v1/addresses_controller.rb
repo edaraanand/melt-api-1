@@ -1,6 +1,7 @@
 class Api::V1::AddressesController < Api::V1::BaseController
   before_action :authenticate
 
+  # GET /api/v1/addresses
   def index
     addresses = Address.where(account_id: @account.id)
 
@@ -13,12 +14,14 @@ class Api::V1::AddressesController < Api::V1::BaseController
     )
   end
 
+  # GET /api/v1/address/:id
   def show
     address = @account.addresses.find(params[:id])
 
     render(json: Api::V1::AddressSerializer.new(address).to_json)
   end
 
+  # POST /api/v1/addresses
   def create
     address = @account.addresses.new(create_params)
     return api_error(status: 422, errors: address.errors) unless address.valid?
@@ -32,12 +35,10 @@ class Api::V1::AddressesController < Api::V1::BaseController
     )
   end
 
+  # DELETE /api/v1/addresses/:id
   def destroy
     address = @account.addresses.find(params[:id]).destroy
-
-    if !address.destroy
-      return api_error(status: 500)
-    end
+    return api_error(status: 500) unless address.destroy
 
     render(json: { 'message': 'Success! Address has been deleted.' })
   end
