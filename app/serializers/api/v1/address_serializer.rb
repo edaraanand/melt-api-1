@@ -1,6 +1,6 @@
 class Api::V1::AddressSerializer < Api::V1::BaseSerializer
   attributes(
-    :id,
+    :uuid,
     :description,
     :name,
     :company,

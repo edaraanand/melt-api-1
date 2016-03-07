@@ -16,7 +16,8 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/address/:id
   def show
-    address = @account.addresses.find(params[:id])
+    address = @account.addresses.where(uuid: params[:uuid]).first
+    raise ActiveRecord::RecordNotFound if address.blank?
 
     render(json: Api::V1::AddressSerializer.new(address).to_json)
   end
@@ -37,7 +38,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # DELETE /api/v1/addresses/:id
   def destroy
-    address = @account.addresses.find(params[:id]).destroy
+    address = @account.addresses.where(uuid: params[:uuid]).first.destroy
     return api_error(status: 500) unless address.destroy
 
     render(json: { 'message': 'Success! Address has been deleted.' })

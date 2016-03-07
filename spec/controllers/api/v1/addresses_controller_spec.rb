@@ -26,10 +26,10 @@ describe Api::V1::AddressesController do
 
       add_token_to_header(@user_account.test_api_key)
 
-      get :show, { id: address.id }
+      get :show, { uuid: address.uuid }
 
       expect(response).to be_success
-      expect(json['id']).to          eq(address.id)
+      expect(json['uuid']).to        eq(address.uuid)
       expect(json['description']).to eq(address.description)
       expect(json['company']).to     eq(address.company)
     end
@@ -37,7 +37,7 @@ describe Api::V1::AddressesController do
     it 'sends a 404 when an address record is not found' do
       add_token_to_header(@user_account.test_api_key)
 
-      get :show, { id: 'asdcaw1233' }
+      get :show, { uuid: 'asdcaw1233' }
 
       expect(response).to have_http_status(404)
       expect(json['message']).to eq 'Record not found.'
@@ -76,7 +76,7 @@ describe Api::V1::AddressesController do
 
       add_token_to_header(@user_account.test_api_key)
 
-      delete :destroy, { id: address.id }
+      delete :destroy, { uuid: address.uuid }
 
       expect(response).to have_http_status(200)
       expect(json['message']).to eq 'Success! Address has been deleted.'
@@ -88,7 +88,7 @@ describe Api::V1::AddressesController do
 
       add_token_to_header('incorrect_token')
 
-      delete :destroy, { id: address.id }
+      delete :destroy, { uuid: address.uuid }
 
       expect(response).to have_http_status(401)
       expect(json['error']).to eq 'Invalid HTTP token. Access denied.'

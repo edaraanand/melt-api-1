@@ -5,4 +5,5 @@ class Address < ActiveRecord::Base
 
   validates :description, :name, :address_line_1, :address_city,
             :address_state, :address_zip, :address_country, presence: true
+
 end

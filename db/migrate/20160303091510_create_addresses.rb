@@ -1,6 +1,7 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
+      t.string :uuid
       t.string :description
       t.string :name
       t.string :company

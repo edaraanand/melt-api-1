@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      resources :addresses, only: [:index, :create, :show, :update, :destroy]
+      resources :addresses, param: :uuid, only: [:index, :create, :show, :update, :destroy]
     end
   end
 

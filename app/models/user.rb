@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def create_account
     self.account = Account.new
-    self.account_id = self.account.id
+    self.account_id = self.account.uuid
     self.account.save!
   end
 end

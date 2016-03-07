@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20160303201956) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
+    t.string   "uuid"
     t.string   "test_api_key", null: false
     t.string   "live_api_key"
     t.datetime "created_at",   null: false
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160303201956) do
   end
 
   create_table "addresses", force: :cascade do |t|
+    t.string   "uuid"
     t.string   "description"
     t.string   "name"
     t.string   "company"
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160303201956) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "uuid"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
