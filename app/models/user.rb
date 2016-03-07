@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  before_create :randomize_id, :create_account
+  include Randomized
+
+  before_create :create_account
 
   belongs_to :account
 
@@ -9,12 +11,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   private
-
-  def randomize_id
-    begin
-      self.id = SecureRandom.random_number(100_000_000)
-    end while self.class.where(id: self.id).exists?
-  end
 
   def create_account
     self.account = Account.new
