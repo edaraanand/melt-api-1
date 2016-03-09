@@ -8,8 +8,8 @@
     <div class="dashboard-left">
       <div class="dashboard-left-div">
         <h4>General</h4>
-        <a href="dashboard.html" class="dashboard-menu-link">Dashboard</a>
-        <a href="address-book.html" class="dashboard-menu-link">Address Book</a>
+        <%= link_to "Dashboard", dashboard_path, class: "dashboard-menu-link" %>
+        <%= link_to "Address Book", addresses_path, class: "dashboard-menu-link" %>
         <!-- <a href="address-verification.html" class="dashboard-menu-link">Address Verification</a> -->
         <h4>Chocolates api</h4>
         <a href="chocolates-index.html" class="dashboard-menu-link">Chocolates</a>

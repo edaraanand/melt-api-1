@@ -1,0 +1,30 @@
+<%= render "general_top_nav" -%>
+
+      <%= render "general_navigation" -%>
+
+      <div class="dashboard-right">
+        <div class="dashboard-right-top">
+          <div data-delay="0" class="w-dropdown">
+            <div class="w-dropdown-toggle environment-selector">
+              <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
+              <div class="w-icon-dropdown-toggle"></div>
+            </div>
+            <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
+            </nav>
+          </div>
+        </div>
+        <div class="w-clearfix dashboard-right-metrics">
+          <h2 class="content-h2 right-header">Create a New Address</h2>
+          <%= image_tag("icon-service-address.svg", class: "address-icon", width: 52) %>
+        </div>
+        <div class="dashboard-right-content thick-padding">
+
+          <%= render 'form' %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "dashboard_footer" -%>

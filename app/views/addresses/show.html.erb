@@ -1,0 +1,96 @@
+<%= render "general_top_nav" -%>
+
+      <%= render "general_navigation" -%>
+
+      <div class="dashboard-right">
+          <div class="dashboard-right-top">
+            <div data-delay="0" class="w-dropdown">
+              <div class="w-dropdown-toggle environment-selector">
+                <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
+                <div class="w-icon-dropdown-toggle"></div>
+              </div>
+              <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
+              </nav>
+            </div>
+          </div>
+          <div class="dashboard-right-metrics">
+            <h2 class="content-h2 right-header"><%= truncate(@address.description, length: 35) %>&nbsp;<span class="resource-id-text">- <%= @address.uuid %></span></h2>
+          </div>
+          <div class="dashboard-right-content top-padding">
+            <div class="w-clearfix card-div details-card">
+              <h4 class="show-card-h4">address details</h4>
+              <div class="hr"></div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">name:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.name %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">company:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.company %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">address line 1:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_line_1 %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">address line 2:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_line_2 %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">city:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_city %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">state:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_state %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">zip code:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_zip %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">country:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.address_country %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">phone:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.phone %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">email:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.email %></h5>
+              </div>
+              <div class="headers no-border details-card">
+                <h5 class="no-margin">date created:</h5>
+              </div>
+              <div class="card-details-text">
+                <h5 class="no-margin details"><%= @address.created_at %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%= render "dashboard_footer" -%>

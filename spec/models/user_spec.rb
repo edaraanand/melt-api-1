@@ -13,6 +13,7 @@ describe User do
 
   it 'should have an account created upon registration' do
     subject = create(:user)
+    subject.save
 
     expect(subject.account).not_to be nil
   end
