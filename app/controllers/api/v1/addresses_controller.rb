@@ -24,7 +24,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # POST /api/v1/addresses
   def create
-    address = @account.addresses.new(create_params)
+    address = @account.addresses.new(address_params)
     return api_error(status: 422, errors: address.errors) unless address.valid?
 
     address.save!
@@ -46,11 +46,19 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   private
 
-  def create_params
+  def address_params
     params.require(:address).permit(
-      :name, :address_line_1, :address_line_2, :description,
-      :address_city, :address_state, :address_zip, :address_country,
-      :company, :phone, :email
-     )
+      :description,
+      :name,
+      :address_line_1,
+      :address_line_2,
+      :address_city,
+      :address_state,
+      :address_zip,
+      :address_country,
+      :company,
+      :phone,
+      :email
+    )
   end
 end

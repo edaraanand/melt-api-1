@@ -1,0 +1,72 @@
+<div class="w-form">
+  <%= simple_form_for(@address, html: { class: 'w-clearfix' }) do |f| %>
+    <%= f.error_notification %>
+    <label for="name">Description</label>
+    <%= f.input :description, label: false, placeholder: "Sally - Home", input_html: { class: "w-input dashboard-text-field" } %>
+    <div class="two-column-form-div">
+      <div class="w-row two-column-form">
+        <div class="w-col w-col-6 no-padding-left-column">
+          <label for="email" class="two-left-field-name">Name <span class="required-form">*</span>
+          </label>
+          <%= f.input :name, label: false, placeholder: "Sally Johnson", input_html: { class: "w-input dashboard-text-field two_left" } %>
+        </div>
+        <div class="w-col w-col-6 no-padding-column-right">
+          <label for="field" class="two-right-field-label">Company</label>
+          <%= f.input :company, label: false, placeholder: "Company Inc", input_html: { class: "w-input dashboard-text-field two_right" } %>
+        </div>
+      </div>
+    </div>
+    <div class="two-column-form-div">
+      <div class="w-row two-column-form">
+        <div class="w-col w-col-6 no-padding-left-column">
+          <label for="email-2" class="two-left-field-name">Address line 1&nbsp;<span class="required-form">*</span>
+          </label>
+          <%= f.input :address_line_1, label: false, placeholder: "123 Test Road", input_html: { class: "w-input dashboard-text-field two_left" } %>
+        </div>
+        <div class="w-col w-col-6 no-padding-column-right">
+          <label for="field-11" class="two-right-field-label">Address line 2</label>
+          <%= f.input :address_line_2, label: false, placeholder: "Suite 100", input_html: { class: "w-input dashboard-text-field two_right" } %>
+        </div>
+      </div>
+    </div>
+    <div class="three-column-form-div">
+      <div class="w-row">
+        <div class="w-col w-col-4 no-padding-left-column">
+          <label for="field-3" class="three-left-field-name">City <span class="required-form">*</span>
+          </label>
+          <%= f.input :address_city, label: false, placeholder: "San Francisco", input_html: { class: "w-input dashboard-text-field three-left-field" } %>
+        </div>
+        <div class="w-col w-col-4 no-padding-middle-column">
+          <label for="field-6" class="three-mid-field-name">State <span class="required-form">*</span>
+          </label>
+          <%= f.input :address_state, label: false, placeholder: "California", input_html: { class: "w-input dashboard-text-field three-mid-field" } %>
+        </div>
+        <div class="w-col w-col-4 no-padding-column-right">
+          <label for="field-7" class="three-right-field-name">Zip/Postal Code <span class="required-form">*</span>
+          </label>
+          <%= f.input :address_zip, label: false, placeholder: "94110", input_html: { class: "w-input dashboard-text-field three-right-field" } %>
+        </div>
+      </div>
+    </div>
+    <div class="three-column-form-div">
+      <div class="w-row">
+        <div class="w-col w-col-4 no-padding-left-column form-inputs">
+          <label for="field-12" class="three-left-field-name">Country&nbsp;<span class="required-form">*</span>
+          </label>
+          <%= f.input :address_country, label: false, prompt: "Select Country", input_html: { class: "w-input dashboard-text-field three-left-field" } %>
+        </div>
+        <div class="w-col w-col-4 no-padding-middle-column">
+          <label for="field-13" class="three-mid-field-name">Phone Number&nbsp;<span class="required-form">*</span>
+          </label>
+          <%= f.input :phone, label: false, placeholder: "222-222-222", input_html: { class: "w-input dashboard-text-field three-mid-field" } %>
+        </div>
+        <div class="w-col w-col-4 no-padding-column-right">
+          <label for="field-14" class="three-right-field-name">Email address</label>
+          <%= f.input :email, label: false, placeholder: "sally@melthq.com", input_html: { class: "w-input dashboard-text-field three-right-field" } %>
+        </div>
+      </div>
+    </div>
+    <div class="form-hr"></div>
+    <input type="submit" value="create" data-wait="Please wait..." class="w-button content-button full">
+  <% end %>
+</div>

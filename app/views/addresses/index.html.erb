@@ -13,10 +13,44 @@
             </nav>
           </div>
         </div>
-        <div class="dashboard-right-content">
-          <h2 class="content-h2 margin-top-center">You have no Addresses added.</h2>
-          <h4 class="content-h4 centered">Add addresses to your address book.</h4><a href="address-create.html" class="w-button content-button">Create new address</a>
-        </div>
+        <% if current_user.account.addresses.blank? %>
+          <div class="dashboard-right-content">
+            <h2 class="content-h2 margin-top-center">You have no Addresses added.</h2>
+            <h4 class="content-h4 centered">Add addresses to your address book.</h4>
+            <%= link_to "Create new address", new_address_path, class: "w-button content-button" %>
+          </div>
+        <% else %>
+          <% @addresses.each do |adr| %>
+            <div class="dashboard-right-content">
+              <%= link_to(address_path(adr.uuid), class: "w-inline-block log-item-link-block") do %>
+                <div class="log-item-div">
+                  <div class="w-row log-column">
+                    <div class="w-col w-col-3 no-padding-left-column">
+                      <div>
+                        <p class="log-text"><%= truncate(adr.description, length: 20) %></p>
+                      </div>
+                    </div>
+                    <div class="w-col w-col-4 no-padding-middle-column">
+                      <div>
+                        <p class="log-text"><%= truncate(adr.name, length: 20) %></p>
+                      </div>
+                    </div>
+                    <div class="w-col w-col-4 no-padding-middle-column">
+                      <div>
+                        <p class="log-text"><%= truncate(adr.address_line_1, length: 25) %></p>
+                      </div>
+                    </div>
+                    <div class="w-col w-col-1 w-clearfix no-padding-column-right">
+                      <div class="log-carrot-div"><%= image_tag("right_carat_icon.png", class: "right-caret-image") %>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="w-clearfix log-create-div"><%= link_to("New", new_address_path, class: "w-button content-button full log-new-button") %></div>
       </div>
     </div>
   </div>

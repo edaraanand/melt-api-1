@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   # UI
-  resources :addresses, param: :uuid, only: [:index, :create, :show, :destroy]
+  resources :addresses, param: :uuid, only: [:index, :new, :create, :show, :destroy]
 
   get "/dashboard" => 'dashboards#dashboard', as: :dashboard
 
