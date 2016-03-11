@@ -24,7 +24,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # POST /api/v1/addresses
   def create
-    address = @account.addresses.new(address_params)
+    address = @account.addresses.create(address_params)
     return api_error(status: 422, errors: address.errors) unless address.valid?
 
     address.save!
