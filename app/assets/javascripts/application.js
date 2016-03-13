@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+$(function() {
+    $('select[name="session_status"]').change(function() {
+        $.ajax({
+            data: 'session_status=' + this.value,
+            success: function() {
+                location.reload();
+            }
+        });
+    });
+});

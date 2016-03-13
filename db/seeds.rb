@@ -23,6 +23,20 @@ a1.addresses.create(description:     'Account 1 - Address 1',
                     phone:           '222-222-222',
                     email:           'e1@glenn.com').save
 
+a1.addresses.create(description:     'Account 1 - LIVE',
+                    name:            'LIVE Test',
+                    address_line_1:  'LIVE',
+                    address_line_2:  'LIVE 100',
+                    address_city:    'LIVE Francisco',
+                    address_state:   'CA',
+                    address_zip:     '94201',
+                    address_country: 'US',
+                    company:         'Melt',
+                    phone:           '222-222-222',
+                    email:           'e1@glenn.com',
+                    live:            true).save
+
+
 15.times do
   a1.addresses.create(description:     Faker::Lorem.sentence,
                       name:            Faker::Name.name,

@@ -20,4 +20,23 @@
         <a href="settings-general.html" class="dashboard-menu-link bottom-link">Settings</a>
       </div>
     </div>
+    <div class="dashboard-right">
+      <div class="dashboard-right-top">
+       
+        <select name= "session_status", :onchange => "location.href = '#{current_path}'"  >
+          <option value="test">Test Environment</option>
+          <option value="live">Live Environment</option>
+          <option value="test">Test Environment</option>
+        </select>
+
+      
+        <div data-delay="0" class="w-dropdown">
+          <div class="w-dropdown-toggle environment-selector">
+            <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
+            <div class="w-icon-dropdown-toggle"></div>
+          </div>
+          <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
+          </nav>
+        </div>
+      </div>
 

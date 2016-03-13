@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20160303201956) do
     t.string   "address_country"
     t.string   "phone"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "live",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "account_id"
   end
 

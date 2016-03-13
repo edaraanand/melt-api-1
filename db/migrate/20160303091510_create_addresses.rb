@@ -13,6 +13,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :address_country
       t.string :phone
       t.string :email
+      t.boolean :live, default: false
 
       t.timestamps null: false
     end

@@ -1,8 +1,9 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :destroy]
+  before_action :set_session_status
 
   def index
-    @addresses = current_user.account.addresses
+    @addresses = current_user.account.addresses.where(live: session[:session_is_live])
   end
 
   def show
@@ -19,6 +20,15 @@ class AddressesController < ApplicationController
       redirect_to address_path(@address.uuid), notice: 'Address Created.'
     else
       render action: 'new'
+    end
+  end
+
+  def set_session_status
+    case params[:session_status]
+    when "test"
+      session[:session_is_live] = false
+    when "live"
+      session[:session_is_live] = true
     end
   end
 
