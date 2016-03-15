@@ -1,18 +1,20 @@
 <%= render "general_top_nav" -%>
 
+<div id="how-it-works" class="tan-div">
+  <div class="w-section content mid-content">
+    <div class="w-clearfix">
+      <p class="love-company-header">We &nbsp; &nbsp; &nbsp; Real Estate CRM, Inc.</p>
+      <%= image_tag("heart.png", width: "20", class: 'heart-icon') %>
+    </div>
+
+    <div class="w-clearfix dashboard-wrapper">
+
       <%= render "general_navigation" -%>
 
       <div class="dashboard-right">
-        <div class="dashboard-right-top">
-          <div data-delay="0" class="w-dropdown">
-            <div class="w-dropdown-toggle environment-selector">
-              <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
-              <div class="w-icon-dropdown-toggle"></div>
-            </div>
-            <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
-            </nav>
-          </div>
-        </div>
+
+        <%= render "general_environment_selection" -%>
+
         <div class="dashboard-right-metrics centered-metrics">
           <div class="w-row">
             <div class="w-col w-col-4">
@@ -35,13 +37,18 @@
             </div>
           </div>
         </div>
+
         <div class="dashboard-right-content regular-padding">
-          <h4 class="content-h4">charges</h4><%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
-          <h4 class="content-h4">transactions</h4><%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
+          <h4 class="content-h4">charges</h4>
+          <%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
+          <h4 class="content-h4">transactions</h4>
+          <%= image_tag("Screen Shot 2016-02-23 at 1.10.23 AM.png", class: "filler-graph") %>
         </div>
+
       </div>
     </div>
   </div>
 </div>
+
 
 <%= render "dashboard_footer" -%>

@@ -1,18 +1,18 @@
 <%= render "general_top_nav" -%>
+<div id="how-it-works" class="tan-div">
+  <div class="w-section content mid-content">
+    <div class="w-clearfix">
+      <p class="love-company-header">We &nbsp; &nbsp; &nbsp; Real Estate CRM, Inc.</p>
+      <%= image_tag("heart.png", width: "20", class: 'heart-icon') %>
+    </div>
+
+    <div class="w-clearfix dashboard-wrapper">
 
       <%= render "general_navigation" -%>
-
       <div class="dashboard-right">
-        <div class="dashboard-right-top">
-          <div data-delay="0" class="w-dropdown">
-            <div class="w-dropdown-toggle environment-selector">
-              <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
-              <div class="w-icon-dropdown-toggle"></div>
-            </div>
-            <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
-            </nav>
-          </div>
-        </div>
+
+        <%= render "general_environment_selection" -%>
+
         <% if current_user.account.addresses.blank? %>
           <div class="dashboard-right-content">
             <h2 class="content-h2 margin-top-center">You have no Addresses added.</h2>
@@ -27,12 +27,12 @@
                   <div class="w-row log-column">
                     <div class="w-col w-col-3 no-padding-left-column">
                       <div>
-                        <p class="log-text"><%= truncate(adr.description, length: 20) %></p>
+                        <p class="log-text"><%= truncate(adr.description, length: 18) %></p>
                       </div>
                     </div>
                     <div class="w-col w-col-4 no-padding-middle-column">
                       <div>
-                        <p class="log-text"><%= truncate(adr.name, length: 20) %></p>
+                        <p class="log-text"><%= truncate(adr.name, length: 18) %></p>
                       </div>
                     </div>
                     <div class="w-col w-col-4 no-padding-middle-column">
@@ -50,7 +50,8 @@
             </div>
           <% end %>
         <% end %>
-        <div class="w-clearfix log-create-div"><%= link_to("New", new_address_path, class: "w-button content-button full log-new-button") %></div>
+        <div class="w-clearfix log-create-div">
+          <%= link_to("New", new_address_path, class: "w-button content-button full log-new-button") %></div>
       </div>
     </div>
   </div>
