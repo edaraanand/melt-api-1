@@ -1,34 +1,9 @@
-<%= render "general_top_nav" -%>
-
-<div id="how-it-works" class="tan-div">
-  <div class="w-section content mid-content">
-    <div class="w-clearfix">
-      <p class="love-company-header">We &nbsp; &nbsp; &nbsp; Real Estate CRM, Inc.</p>
-      <%= image_tag("heart.png", width: "20", class: 'heart-icon') %>
-    </div>
-
-    <div class="w-clearfix dashboard-wrapper">
-
-      <%= render "general_navigation" -%>
-
-      <div class="dashboard-right">
-
-        <%= render "general_environment_selection" -%>
-
-
-
-        <div class="w-clearfix dashboard-right-metrics">
-          <h2 class="content-h2 right-header">Create a New Address</h2>
-          <%= image_tag("icon-service-address.svg", class: "address-icon", width: 52) %>
-        </div>
-        <div class="dashboard-right-content thick-padding">
-
-          <%= render 'form' %>
-
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="w-clearfix dashboard-right-metrics">
+  <h2 class="content-h2 right-header">Create a New Address</h2>
+  <%= image_tag("icon-service-address.svg", class: "address-icon", width: 52) %>
 </div>
+<div class="dashboard-right-content thick-padding">
 
-<%= render "dashboard_footer" -%>
+  <%= render 'form' %>
+
+</div>
