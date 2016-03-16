@@ -3,7 +3,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/addresses
   def index
-    addresses = Address.where(account_id: @account.id)
+    addresses = find_all_based_on_session(@account.id)
 
     render(
       json: ActiveModel::ArraySerializer.new(

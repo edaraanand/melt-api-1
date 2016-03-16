@@ -4,23 +4,41 @@ describe Api::V1::AddressesController do
   before do
     @user = create(:user)
     @user_account = @user.account
+    @user_account.live_api_key = 'live_api_key'
+    @user_account.save
   end
 
-  context '#index' do
-    it 'sends a list of addresses associated to an account' do
-      create_list(:address, 7, account_id: @user_account.id)
-      create_list(:address, 5, account_id: 123)
+  describe '#index' do
+    context 'with a test_api_key' do
+      it 'sends the list of test addresses associated to an account' do
+        create_list(:test_address, 7, account_id: @user_account.id)
+        create_list(:test_address, 5, account_id: 123)
 
-      add_token_to_header(@user_account.test_api_key)
+        add_token_to_header(@user_account.test_api_key)
 
-      get :index
+        get :index
 
-      expect(response).to be_success
-      expect(json['data'].count).to eq(7)
+        expect(response).to be_success
+        expect(json['data'].count).to eq(7)
+      end
+    end
+
+    context 'with a live_api_key' do
+      it 'sends the list of live addresses associated to an account' do
+        create_list(:address, 7, account_id: @user_account.id)
+        create_list(:address, 5, account_id: 123)
+
+        add_token_to_header(@user_account.live_api_key)
+
+        get :index
+
+        expect(response).to be_success
+        expect(json['data'].count).to eq(7)
+      end
     end
   end
 
-  context '#show' do
+  describe '#show' do
     it 'sends data regarding a specific address associated to an account' do
       address = create(:address, account_id: @user_account.id)
 
@@ -44,7 +62,7 @@ describe Api::V1::AddressesController do
     end
   end
 
-  context '#create' do
+  describe '#create' do
     it 'allows users to POST a new address and create an address record' do
       address_body = FactoryGirl
         .attributes_for(:address)
@@ -70,7 +88,7 @@ describe Api::V1::AddressesController do
     end
   end
 
-  context '#delete' do
+  describe '#delete' do
     it 'allows the correct account to delete an address' do
       address = create(:address, account_id: @user_account.id)
 
