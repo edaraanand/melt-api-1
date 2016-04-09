@@ -67,7 +67,7 @@ class Api::V1::BaseController < ApplicationController
     )
   end
 
-  def find_all_based_on_session(id)
+  def index_based_on_session(id)
     case session[:session_mode]
     when "TEST"
       TestAddress.where(account_id: id)
@@ -75,4 +75,14 @@ class Api::V1::BaseController < ApplicationController
       Address.where(account_id: id)
     end
   end
+
+  def show_based_on_session(id)
+    case session[:session_mode]
+    when "TEST"
+      @account.test_addresses.where(uuid: id).first
+    when "LIVE"
+      @account.addresses.where(uuid: id).first
+    end
+  end
+
 end

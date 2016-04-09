@@ -5,6 +5,7 @@ describe Api::V1::AddressesController do
     @user = create(:user)
     @user_account = @user.account
     @user_account.live_api_key = 'live_api_key'
+    @user_account.test_api_key = 'test_api_key'
     @user_account.save
   end
 
@@ -39,26 +40,52 @@ describe Api::V1::AddressesController do
   end
 
   describe '#show' do
-    it 'sends data regarding a specific address associated to an account' do
-      address = create(:address, account_id: @user_account.id)
+    context 'with a test_api_key' do
+      it 'sends data regarding a specific address associated to an account' do
+        address = create(:test_address, account_id: @user_account.id)
 
-      add_token_to_header(@user_account.test_api_key)
+        add_token_to_header(@user_account.test_api_key)
 
-      get :show, { uuid: address.uuid }
+        get :show, { uuid: address.uuid }
 
-      expect(response).to be_success
-      expect(json['uuid']).to        eq(address.uuid)
-      expect(json['description']).to eq(address.description)
-      expect(json['company']).to     eq(address.company)
+        expect(response).to be_success
+        expect(json['uuid']).to        eq(address.uuid)
+        expect(json['description']).to eq(address.description)
+        expect(json['company']).to     eq(address.company)
+      end
+
+      it 'sends a 404 when an address record is not found' do
+        add_token_to_header(@user_account.test_api_key)
+
+        get :show, { uuid: 'asdcaw1233' }
+
+        expect(response).to have_http_status(404)
+        expect(json['message']).to eq 'Record not found.'
+      end
     end
 
-    it 'sends a 404 when an address record is not found' do
-      add_token_to_header(@user_account.test_api_key)
+    context 'with a live_api_key' do
+      it 'sends data regarding a specific address associated to an account' do
+        address = create(:address, account_id: @user_account.id)
 
-      get :show, { uuid: 'asdcaw1233' }
+        add_token_to_header(@user_account.live_api_key)
 
-      expect(response).to have_http_status(404)
-      expect(json['message']).to eq 'Record not found.'
+        get :show, { uuid: address.uuid }
+
+        expect(response).to be_success
+        expect(json['uuid']).to        eq(address.uuid)
+        expect(json['description']).to eq(address.description)
+        expect(json['company']).to     eq(address.company)
+      end
+
+      it 'sends a 404 when an address record is not found' do
+        add_token_to_header(@user_account.live_api_key)
+
+        get :show, { uuid: 'asdcaw1233' }
+
+        expect(response).to have_http_status(404)
+        expect(json['message']).to eq 'Record not found.'
+      end
     end
   end
 

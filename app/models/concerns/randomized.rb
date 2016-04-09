@@ -7,11 +7,13 @@ module Randomized
 
   def randomize_uuid
     case self.class.to_s
-    when "Address"
+    when 'Address'
       generate_uuid('adr')
-    when "Account"
+    when 'TestAddress'
+      generate_uuid('adr')
+    when 'Account'
       generate_uuid('acc')
-    when "User"
+    when 'User'
       generate_uuid('usr')
     end
   end
