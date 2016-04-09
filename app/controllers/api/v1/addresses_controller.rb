@@ -3,7 +3,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/addresses
   def index
-    addresses = Address.where(account_id: @account.id)
+    addresses = index_based_on_session(@account.id)
 
     render(
       json: ActiveModel::ArraySerializer.new(
@@ -16,7 +16,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/address/:id
   def show
-    address = @account.addresses.where(uuid: params[:uuid]).first
+    address = show_based_on_session(params[:uuid])
     raise ActiveRecord::RecordNotFound if address.blank?
 
     render(json: Api::V1::AddressSerializer.new(address).to_json)

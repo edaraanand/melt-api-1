@@ -1,4 +1,6 @@
 class AddressesController < ApplicationController
+  layout 'dashboard'
+
   before_action :set_address, only: [:show, :destroy]
 
   def index

@@ -26,7 +26,15 @@ class Api::V1::BaseController < ApplicationController
 
   def authenticate_token
     authenticate_with_http_token do |token, options|
-      @account = Account.where(test_api_key: token).first
+      if token.include? "test"
+        @account = Account.where(test_api_key: token).first || render_unauthorized
+        session[:session_mode] = "TEST"
+      elsif token.include? "live"
+        @account = Account.where(live_api_key: token).first || render_unauthorized
+        session[:session_mode] = "LIVE"
+      else
+        render_unauthorized
+      end
     end
   end
 
@@ -57,6 +65,24 @@ class Api::V1::BaseController < ApplicationController
       json: { 'message': 'Record not found.' },
       status: 404
     )
+  end
+
+  def index_based_on_session(id)
+    case session[:session_mode]
+    when "TEST"
+      TestAddress.where(account_id: id)
+    when "LIVE"
+      Address.where(account_id: id)
+    end
+  end
+
+  def show_based_on_session(id)
+    case session[:session_mode]
+    when "TEST"
+      @account.test_addresses.where(uuid: id).first
+    when "LIVE"
+      @account.addresses.where(uuid: id).first
+    end
   end
 
 end

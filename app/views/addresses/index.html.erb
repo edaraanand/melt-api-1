@@ -1,59 +1,40 @@
-<%= render "general_top_nav" -%>
-
-      <%= render "general_navigation" -%>
-
-      <div class="dashboard-right">
-        <div class="dashboard-right-top">
-          <div data-delay="0" class="w-dropdown">
-            <div class="w-dropdown-toggle environment-selector">
-              <div class="environment-selector-text-box">TEST ENVIRONMENT</div>
-              <div class="w-icon-dropdown-toggle"></div>
+<% if current_user.account.addresses.blank? %>
+  <div class="dashboard-right-content">
+    <h2 class="content-h2 margin-top-center">You have no Addresses added.</h2>
+    <h4 class="content-h4 centered">Add addresses to your address book.</h4>
+    <%= link_to "Create new address", new_address_path, class: "w-button content-button" %>
+  </div>
+<% else %>
+  <% @addresses.each do |adr| %>
+    <div class="dashboard-right-content">
+      <%= link_to(address_path(adr.uuid), class: "w-inline-block log-item-link-block") do %>
+        <div class="log-item-div">
+          <div class="w-row log-column">
+            <div class="w-col w-col-3 no-padding-left-column">
+              <div>
+                <p class="log-text"><%= truncate(adr.description, length: 18) %></p>
+              </div>
             </div>
-            <nav class="w-dropdown-list environment-dropdown"><a href="#" class="w-dropdown-link live-environment-dropdown">LIVE ENVIRONMENT</a>
-            </nav>
+            <div class="w-col w-col-4 no-padding-middle-column">
+              <div>
+                <p class="log-text"><%= truncate(adr.name, length: 18) %></p>
+              </div>
+            </div>
+            <div class="w-col w-col-4 no-padding-middle-column">
+              <div>
+                <p class="log-text"><%= truncate(adr.address_line_1, length: 25) %></p>
+              </div>
+            </div>
+            <div class="w-col w-col-1 w-clearfix no-padding-column-right">
+              <div class="log-carrot-div"><%= image_tag("right_carat_icon.png", class: "right-caret-image") %>
+            </div>
+            </div>
           </div>
         </div>
-        <% if current_user.account.addresses.blank? %>
-          <div class="dashboard-right-content">
-            <h2 class="content-h2 margin-top-center">You have no Addresses added.</h2>
-            <h4 class="content-h4 centered">Add addresses to your address book.</h4>
-            <%= link_to "Create new address", new_address_path, class: "w-button content-button" %>
-          </div>
-        <% else %>
-          <% @addresses.each do |adr| %>
-            <div class="dashboard-right-content">
-              <%= link_to(address_path(adr.uuid), class: "w-inline-block log-item-link-block") do %>
-                <div class="log-item-div">
-                  <div class="w-row log-column">
-                    <div class="w-col w-col-3 no-padding-left-column">
-                      <div>
-                        <p class="log-text"><%= truncate(adr.description, length: 20) %></p>
-                      </div>
-                    </div>
-                    <div class="w-col w-col-4 no-padding-middle-column">
-                      <div>
-                        <p class="log-text"><%= truncate(adr.name, length: 20) %></p>
-                      </div>
-                    </div>
-                    <div class="w-col w-col-4 no-padding-middle-column">
-                      <div>
-                        <p class="log-text"><%= truncate(adr.address_line_1, length: 25) %></p>
-                      </div>
-                    </div>
-                    <div class="w-col w-col-1 w-clearfix no-padding-column-right">
-                      <div class="log-carrot-div"><%= image_tag("right_carat_icon.png", class: "right-caret-image") %>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-        <div class="w-clearfix log-create-div"><%= link_to("New", new_address_path, class: "w-button content-button full log-new-button") %></div>
-      </div>
+      <% end %>
     </div>
-  </div>
-</div>
-
-<%= render "dashboard_footer" -%>
+    <div class="w-clearfix log-create-div">
+      <%= link_to("New", new_address_path, class: "w-button content-button full log-new-button") %></div>
+    </div>
+  <% end %>
+<% end %>
