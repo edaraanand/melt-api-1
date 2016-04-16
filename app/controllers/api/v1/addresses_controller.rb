@@ -3,7 +3,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/addresses
   def index
-    addresses = index_based_on_session(@account.id)
+    addresses = sessionizer.index
 
     render(
       json: ActiveModel::ArraySerializer.new(
@@ -16,7 +16,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # GET /api/v1/address/:id
   def show
-    address = show_based_on_session(params[:uuid])
+    address = sessionizer(uuid: params[:uuid]).show
     raise ActiveRecord::RecordNotFound if address.blank?
 
     render(json: Api::V1::AddressSerializer.new(address).to_json)
@@ -24,7 +24,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # POST /api/v1/addresses
   def create
-    address = @account.addresses.create(address_params)
+    address = sessionizer(params: address_params).create
     return api_error(status: 422, errors: address.errors) unless address.valid?
 
     address.save!
@@ -38,7 +38,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   # DELETE /api/v1/addresses/:id
   def destroy
-    address = @account.addresses.where(uuid: params[:uuid]).first.destroy
+    address = sessionizer(uuid: params[:uuid]).destroy
     return api_error(status: 500) unless address.destroy
 
     render(json: { 'message': 'Success! Address has been deleted.' })
@@ -59,6 +59,16 @@ class Api::V1::AddressesController < Api::V1::BaseController
       :company,
       :phone,
       :email
+    )
+  end
+
+  def sessionizer(params: nil, uuid: nil)
+    @sessionizer ||= Sessionizer.new(
+      params:     params,
+      account_id: @account.id,
+      uuid:       uuid,
+      session:    session[:session_mode],
+      account:    @account
     )
   end
 end

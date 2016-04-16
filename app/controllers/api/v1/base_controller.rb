@@ -66,23 +66,4 @@ class Api::V1::BaseController < ApplicationController
       status: 404
     )
   end
-
-  def index_based_on_session(id)
-    case session[:session_mode]
-    when "TEST"
-      TestAddress.where(account_id: id)
-    when "LIVE"
-      Address.where(account_id: id)
-    end
-  end
-
-  def show_based_on_session(id)
-    case session[:session_mode]
-    when "TEST"
-      @account.test_addresses.where(uuid: id).first
-    when "LIVE"
-      @account.addresses.where(uuid: id).first
-    end
-  end
-
 end
