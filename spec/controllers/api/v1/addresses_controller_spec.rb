@@ -90,54 +90,110 @@ describe Api::V1::AddressesController do
   end
 
   describe '#create' do
-    it 'allows users to POST a new address and create an address record' do
-      address_body = FactoryGirl
-        .attributes_for(:address)
+    context 'with a test_api_key' do
+      it 'allows users to POST a new address and create an address record' do
+        address_body = FactoryGirl
+          .attributes_for(:address)
 
-      add_token_to_header(@user_account.test_api_key)
+        add_token_to_header(@user_account.test_api_key)
 
-      post :create, address: address_body.as_json, format: :json
+        post :create, address: address_body.as_json, format: :json
 
-      expect(response).to be_success
-      expect(@user_account.addresses.count).to eq 1
+        expect(response).to be_success
+        expect(@user_account.test_addresses.count).to eq 1
+      end
+
+      it 'triggers a 422 exception with missing required params' do
+        address_body = FactoryGirl
+          .attributes_for(:address, description: nil)
+
+        add_token_to_header(@user_account.test_api_key)
+
+        post :create, address: address_body.as_json, format: :json
+
+        expect(response).to have_http_status(422)
+        expect(@user_account.test_addresses.count).to eq 0
+      end
     end
 
-    it 'triggers a 422 exception with missing required params' do
-      address_body = FactoryGirl
-        .attributes_for(:address, description: nil)
+    context 'with a live_api_key' do
+      it 'allows users to POST a new address and create an address record' do
+        address_body = FactoryGirl
+          .attributes_for(:address)
 
-      add_token_to_header(@user_account.test_api_key)
+        add_token_to_header(@user_account.live_api_key)
 
-      post :create, address: address_body.as_json, format: :json
+        post :create, address: address_body.as_json, format: :json
 
-      expect(response).to have_http_status(422)
-      expect(@user_account.addresses.count).to eq 0
+        expect(response).to be_success
+        expect(@user_account.addresses.count).to eq 1
+      end
+
+      it 'triggers a 422 exception with missing required params' do
+        address_body = FactoryGirl
+          .attributes_for(:address, description: nil)
+
+        add_token_to_header(@user_account.test_api_key)
+
+        post :create, address: address_body.as_json, format: :json
+
+        expect(response).to have_http_status(422)
+        expect(@user_account.addresses.count).to eq 0
+      end
     end
   end
 
   describe '#delete' do
-    it 'allows the correct account to delete an address' do
-      address = create(:address, account_id: @user_account.id)
+    context 'with a test_api_key' do
+      it 'allows the correct account to delete an address' do
+        test_address = create(:test_address, account_id: @user_account.id)
 
-      add_token_to_header(@user_account.test_api_key)
+        add_token_to_header(@user_account.test_api_key)
 
-      delete :destroy, { uuid: address.uuid }
+        delete :destroy, { uuid: test_address.uuid }
 
-      expect(response).to have_http_status(200)
-      expect(json['message']).to eq 'Success! Address has been deleted.'
-      expect(Address.all).to eq []
+        expect(response).to have_http_status(200)
+        expect(json['message']).to eq 'Success! Address has been deleted.'
+        expect(TestAddress.all).to eq []
+      end
+
+      it 'does not allow the incorrect account to update the address' do
+        test_address = create(:test_address, account_id: @user_account.id)
+
+        add_token_to_header('incorrect_token')
+
+        delete :destroy, { uuid: test_address.uuid }
+
+        expect(response).to have_http_status(401)
+        expect(json['error']).to eq 'Invalid HTTP token. Access denied.'
+        expect(TestAddress.count).to eq 1
+      end
     end
 
-    it 'does not allow the incorrect account to update the address' do
-      address = create(:address, account_id: @user_account.id)
+    context 'with a live_api_key' do
+      it 'allows the correct account to delete an address' do
+        address = create(:address, account_id: @user_account.id)
 
-      add_token_to_header('incorrect_token')
+        add_token_to_header(@user_account.live_api_key)
 
-      delete :destroy, { uuid: address.uuid }
+        delete :destroy, { uuid: address.uuid }
 
-      expect(response).to have_http_status(401)
-      expect(json['error']).to eq 'Invalid HTTP token. Access denied.'
-      expect(Address.count).to eq 1
+        expect(response).to have_http_status(200)
+        expect(json['message']).to eq 'Success! Address has been deleted.'
+        expect(Address.all).to eq []
+      end
+
+      it 'does not allow the incorrect account to update the address' do
+        address = create(:address, account_id: @user_account.id)
+
+        add_token_to_header('incorrect_token')
+
+        delete :destroy, { uuid: address.uuid }
+
+        expect(response).to have_http_status(401)
+        expect(json['error']).to eq 'Invalid HTTP token. Access denied.'
+        expect(Address.count).to eq 1
+      end
     end
   end
 
